@@ -1,21 +1,21 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 type propsType = {
-  value: string
-  callbackChange: (event: string) => void
+  title: string
+  setTitle: (event: string) => void
   callbackKeyPress: () => void
 }
-export const Input = (props: propsType) => {
+export const Input = ({title, setTitle, callbackKeyPress, ...props}: propsType) => {
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    props.callbackChange(event.currentTarget.value)
+    setTitle(event.currentTarget.value)
   }
   const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-    event.key === 'Enter' && props.callbackKeyPress()
+    event.key === 'Enter' && callbackKeyPress()
   }
   return  (
     <input
-      value={props.value}
+      value={title}
       onChange={onChangeHandler}
       onKeyPress={onKeyPressHandler}/>
   )
