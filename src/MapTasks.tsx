@@ -1,14 +1,20 @@
 import React, {ChangeEvent} from 'react';
 import {TaskType} from "./Todolist";
+import EditableSpan from "./components/EditableSpan";
 
 type MapTasksType = {
   tasks: Array<TaskType>
   removeTask: (todolistId: string, taskId: string) => void
   changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
   todolistId: string
+  upDateTask: (todolistId: string, taskId: string, title: string) => void
 }
 
-const MapTasks = ({tasks,removeTask,todolistId,...props}: MapTasksType) => {
+const MapTasks = ({tasks, removeTask, todolistId, ...props}: MapTasksType) => {
+
+  const updateTaskTitle = (title: string, taskId: string) => {
+    props.upDateTask(todolistId, taskId, title)
+  }
 
   return (
     <ul>
@@ -23,7 +29,10 @@ const MapTasks = ({tasks,removeTask,todolistId,...props}: MapTasksType) => {
             <input type="checkbox"
                    onChange={onChangeHandler}
                    checked={t.isDone}/>
-            <span>{t.title}</span>
+            {/*<span>{t.title}</span>*/}
+            <EditableSpan
+              title={t.title}
+              callbackForEditableSpan={(title) => updateTaskTitle(title, t.id)}/>
             <button onClick={onClickHandler}>x</button>
           </li>
         })
