@@ -32,7 +32,8 @@ const MapTasks = ({tasks, removeTask, todolistId, ...props}: MapTasksType) => {
             {/*<span>{t.title}</span>*/}
             <EditableSpan
               title={t.title}
-              callbackForEditableSpan={(title) => updateTaskTitle(title, t.id)}/>
+              callbackForEditableSpan={(title) => updateTaskTitle(title, t.id)}
+                       />
             <button onClick={onClickHandler}>x</button>
           </li>
         })
